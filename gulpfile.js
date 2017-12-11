@@ -76,8 +76,13 @@ gulp.task('clean:public', function () {
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
-            baseDir: "./client/public"
+            baseDir: "./client/public",
+            // middleware: function (req, res, next) {
+            //   res.setHeader('Access-Control-Allow-Origin', '*');
+            //   next();
+            // }
         },
+        cors: true,
         tunnel: false,
         host: 'localhost',
         port: 9080,

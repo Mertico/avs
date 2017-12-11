@@ -1,45 +1,24 @@
-.project {
-  width: 100%;
-  background: white;
-  color: #404040;
+.get {
+  border-radius: 5px;
+  border: 2px solid #209020;
+  font-size: 1.4rem;
+  padding: 0.5rem;
 }
-.project__title {
-  width: 100%;
-  font-size: 2.4rem;
-  background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+.get::before {
+  content: "get";
+  font-size: 1.2rem;
   position: relative;
-  text-align: center;
-  padding: 1%;
+  top: 0;
 }
-
-.project-item {
-  width: 100%;
-  background: white;
-  display: grid;
-  grid-template-areas: "name image"
-                       "desc image";
-  grid-gap: 1rem;
-  grid-column-gap: 4rem;
-  padding: 5%;
+.post {
+  border-radius: 5px;
+  border: 2px solid #C08080;
+  font-size: 1.4rem;
+  padding: 0.5rem;
 }
-
-.project .project-item:nth-child(2n+1) {
-  grid-template-areas: "image name"
-                       "image desc";
-}
-
-.project-item__name {
-  font-size: 2.4rem;
-  grid-area: name;
-  display: flex;
-  align-items: flex-end;
-}
-.project-item__desc {
-  font-size: 1.6rem;
-  grid-area: desc;
-}
-.project-item__image {
-  font-size: 1.6rem;
-  grid-area: image;
+.post::before {
+  content: "post";
+  font-size: 1.2rem;
+  position: relative;
+  top: 0;
 }

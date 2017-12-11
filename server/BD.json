@@ -1,0 +1,84 @@
+{
+  "users": [{
+    "login": String,
+    "pass": String,
+    "f_name": String,
+    "s_name": String,
+    "l_name": String,
+    "mail": String,
+    "phone": String
+  }]
+}
+
+{
+  "project": [
+    {
+      "name": String,
+      "id_user": [{ type: Schema.ObjectId, ref: 'users' }],
+      "stage": [{
+        "name": String,
+        "task": [{
+          "name": String,
+          "category": Number,
+          "price": Number,
+          "value": Number
+        }]
+      }],
+      "tags": [{
+          "name": String
+      }],
+      "role": [{
+        "name": String,
+        "people": Number,
+        "time": Number,
+        "price": Number,
+        "discount": Number
+      }],
+      "contacts": {
+        "customer": {
+          "name": String,
+          "official_name": String,
+          "mail": String,
+          "phone": String
+        },
+        "performer": {
+          "name": String,
+          "official_name": String,
+          "mail": String,
+          "phone": String
+        }
+      }
+    }
+  ]
+}
+
+{
+  "tasks": [{
+    "name": String,
+    "role": [{ type: Schema.ObjectId, ref: 'role' }],
+    "people": Number,
+    "time": Number,
+    "category": [{ type: Schema.ObjectId, ref: 'category' }],
+    "tags": [{
+      "name": String
+    }]
+  }]
+}
+
+{
+  "role": [{
+    "name": String,
+    "price": Number,
+    "discount": Number
+  }]
+}
+
+{
+  "category": [{
+    "parent": Number,
+    "name": String,
+    "tags": [{
+      "name": String
+    }]
+  }]
+}
