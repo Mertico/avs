@@ -14,7 +14,7 @@ Course work MiSPISiT
 
 
 ### API
-[API Docs][2]
+[API Docs][3]
 
 [3]:https://documenter.getpostman.com/view/3334799/avs/7EN3pQa
 
