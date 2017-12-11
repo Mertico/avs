@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     express = require('express'),
-    bodyParser = require('body-parser'),
+    bodyParser = require('body-parser')
+    cookieParser = require('cookie-parser'),
     port = process.env.PORT || 3000,
     app = express();
 
@@ -15,17 +16,11 @@ mongoose.connect('mongodb://localhost/api', {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser())
 
-// Middleware
-app.use(function (req, res, next) {
-  let isAuth;
-  if (isAuth) {
-    console.log('Authentication: ',"\x1b[32m",'Success',"\x1b[0m");
-  } else {
-    console.log('Authentication: ',"\x1b[31m",'Failure',"\x1b[0m");
-  }
-  next();
-});
+
+require('./controllers/Auth')(app);
+
 // CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

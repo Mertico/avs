@@ -4,7 +4,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-  module.exports = mongoose.model('ProjectTags', ProjectTagsSchema);
+module.exports = mongoose.model('ProjectTags', ProjectTagsSchema);
 var ProjectRoleSchema = new Schema(
 {
   name: { type: String, required: true },
@@ -12,9 +12,8 @@ var ProjectRoleSchema = new Schema(
   time: { type: Number, required: true },
   price: { type: Number, required: true },
   discount: { type: Number, required: true }
-}
-);
-  module.exports = mongoose.model('ProjectRole', ProjectRoleSchema);
+});
+module.exports = mongoose.model('ProjectRole', ProjectRoleSchema);
 var ProjectContactsSchema = new Schema(
 {
   customer: {
@@ -30,7 +29,7 @@ var ProjectContactsSchema = new Schema(
     phone: { type: String, required: true }
   }
 });
-  module.exports = mongoose.model('ProjectContacts', ProjectContactsSchema);
+module.exports = mongoose.model('ProjectContacts', ProjectContactsSchema);
 var ProjectSchema = new Schema(
 {
   name: { type: String, required: true },
@@ -39,6 +38,5 @@ var ProjectSchema = new Schema(
   tags: [{ type: Schema.Types.ObjectId, ref: 'tags', required: true }],
   role: [ProjectRoleSchema],
   contacts: [ProjectContactsSchema]
-}
-);
+});
 module.exports = mongoose.model('Project', ProjectSchema);
