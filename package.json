@@ -28,6 +28,8 @@
     "gulp-plumber": "^1.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
-    "gulp-uncss": "^1.0.6"
+    "gulp-uncss": "^1.0.6",
+    "proxy-middleware": "^0.15.0",
+    "url": "^0.11.0"
   }
 }

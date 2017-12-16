@@ -1,0 +1,18 @@
+.container.auth {
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  border: 0.2rem solid #303030;
+  border-radius: 0.5rem;
+  padding: 2rem
+}
+.container.auth div {
+  display: inline-block;
+  text-align: center;
+}
+.container.auth h1 {
+  font-size: 2.0rem;
+}
+.container.auth input {
+  font-size: 1.6rem;
+}

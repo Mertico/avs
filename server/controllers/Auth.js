@@ -32,6 +32,11 @@ module.exports = function(app) {
     }
   });
 	// List Routes
+	app.route('/isAuth/')
+		.get((req, res) => {
+			res.status(200).json({ message: 'Authorization' });
+		})
+
 	app.route('/auth/')
 		.post((req, res) => {
       Users.find({ email: req.body.email, password: req.body.password}, function(err, value) {

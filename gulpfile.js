@@ -10,6 +10,11 @@ var gulp = require('gulp'),                          // Сообственно G
     uncss = require('gulp-uncss'),                   // Удаление не используемого CSS кода
     plumber = require('gulp-plumber'),               // Вывод ошибок
     sourcemaps = require('gulp-sourcemaps'),         // Генерация sourcemaps
+
+
+    url = require('url'),
+    proxy = require('proxy-middleware'),
+
     nodemon = require('gulp-nodemon');
 
 /*
@@ -18,7 +23,7 @@ npm init
 npm install gulp browser-sync gulp-myth gulp-csso gulp-imagemin gulp-uglify gulp-concat gulp-uncss gulp-clean gulp-plumber gulp-sourcemaps --save-dev
 gulp watch
 
-npm install gulp-include gulp-nodemon --save-dev
+npm install url proxy-middleware gulp-nodemon --save-dev
 */
 
 // Собираем CSS
@@ -74,9 +79,13 @@ gulp.task('clean:public', function () {
 
 // Локальный сервер для разработки
 gulp.task('browser-sync', function() {
+    var proxyOptions = url.parse('http://localhost:3000/');
+    proxyOptions.route = '/api';
+
     browserSync.init({
         server: {
             baseDir: "./client/public",
+            middleware: [proxy(proxyOptions)]
             // middleware: function (req, res, next) {
             //   res.setHeader('Access-Control-Allow-Origin', '*');
             //   next();
