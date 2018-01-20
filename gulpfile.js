@@ -28,7 +28,7 @@ npm install url proxy-middleware gulp-nodemon --save-dev
 
 // Собираем CSS
 gulp.task('css', function() {
-    gulp.src('./client/assets/css/**/*.css').pipe(plumber())
+    gulp.src(['./client/assets/css/**/*.css', '!./client/assets/css/vendor/**/*.css']).pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(myth()) // добавляем префиксы - http://www.myth.io/
     .pipe(csso())
@@ -36,6 +36,12 @@ gulp.task('css', function() {
     .pipe(sourcemaps.write('map'))
     .pipe(gulp.dest('./client/public/css/')) // записываем css
     .pipe(reload({stream:true})); // даем команду на перезагрузку css
+});
+// Собираем CSS
+gulp.task('css:vendor', function() {
+    gulp.src(['./client/assets/css/vendor/**/*.css']).pipe(plumber())
+        .pipe(gulp.dest('./client/public/css'))
+        .pipe(reload({stream:true})); // даем команду на перезагрузку страницы
 });
 
 // Собираем html
@@ -102,32 +108,36 @@ gulp.task('browser-sync', function() {
 gulp.task('server', function() {
   nodemon({
     script: './server/server.js',
+    watch: './server/'
   })
-  .on('start', function() {
-    reload();
-  })
+  // .on('restart', function() {
+  //   reload();
+  // })
 })
 
 // Запуск сервера разработки gulp & watch Очистка PUBLIC
 gulp.task('watch', ['clean:public','server'], function() {
     // Запуск веб сервера & Предварительная сборка проекта
-    gulp.start('browser-sync', 'css', 'html', 'images', 'js', 'js:vendor');
+    gulp.start('css', 'css:vendor', 'html', 'images', 'js', 'js:vendor', 'browser-sync');
 
-        gulp.watch('./client/assets/css/**/*', function() {
-            gulp.start('css');
-        });
-        gulp.watch('./client/assets/html/**/*', function() {
-            gulp.start('html');
-        });
-        gulp.watch('./client/assets/images/**/*', function() {
-            gulp.start('images');
-        });
-        gulp.watch(['./client/assets/js/**/*.js', '!./client/assets/js/vendor/**/*.js'], function() {
-            gulp.start('js');
-        });
-        gulp.watch('./client/assets/js/vendor/**/*.js', function() {
-            gulp.start('js:vendor');
-        });
+    gulp.watch(['./client/assets/css/**/*.css', '!./client/assets/css/vendor/**/*.css'], function() {
+        gulp.start('css');
+    });
+    gulp.watch('./client/assets/html/**/*', function() {
+        gulp.start('html');
+    });
+    gulp.watch('./client/assets/images/**/*', function() {
+        gulp.start('images');
+    });
+    gulp.watch(['./client/assets/js/**/*.js', '!./client/assets/js/vendor/**/*.js'], function() {
+        gulp.start('js');
+    });
+    gulp.watch('./client/assets/js/vendor/**/*.js', function() {
+        gulp.start('js:vendor');
+    });
+    gulp.watch('./client/assets/css/vendor/**/*.css', function() {
+        gulp.start('css:vendor');
+    });
 });
 
 // Сборка проекта gulp build

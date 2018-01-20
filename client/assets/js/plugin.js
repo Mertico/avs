@@ -1,20 +1,33 @@
 var root = $( "body" );//$($(document).find('body'));
 
+var global_log = $( "<div/>", {class: 'global_log'}).appendTo(root);
+var container = $( "<div/>", {class: 'container'}).appendTo(root);
+
+var writeLog = (data, type='default') => {
+  console.log(data);
+  div = $( "<div/>", {class: "default "+type} )
+    .html(JSON.stringify(data))
+    .appendTo(global_log)
+  console.log(div);
+}
+
+
 var isAuth = false;
 
 $(function() {
-  console.log(123);
 
   $.get( "/api/isAuth" )
-  .done(function() {
+  .done(function(data) {
     isAuth = true;
     // $("body").load('/templates/auth.html');
     console.warn('Authentication:   Success ');
+    writeLog(data, 'auth')
   })
-  .fail(function() {
+  .fail(function(data) {
     isAuth = false;
-    $("body").load('/templates/auth.html');
+    container.load('/templates/auth.html');
     console.warn('Authentication:   Failure ');
+    writeLog(data, 'auth')
   });
 });
 

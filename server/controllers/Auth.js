@@ -23,7 +23,7 @@ module.exports = function(app) {
   });
   app.use(function (req, res, next) {
 
-    if (req.isAuth || req.path==='/auth' || req.path==='/auth/') {
+    if (req.isAuth || req.path==='/auth' || req.path==='/auth/' || req.path==='/reg' || req.path==='/reg/') {
       console.log("Route: ",req.path,"\x1b[32m",'Access',"\x1b[0m");
       next();
     } else {
@@ -32,10 +32,23 @@ module.exports = function(app) {
     }
   });
 	// List Routes
+
+  // isAuth???
 	app.route('/isAuth/')
 		.get((req, res) => {
 			res.status(200).json({ message: 'Authorization' });
 		})
+
+	// New user
+	app.route('/reg/')
+		.post((req, res) => {
+			var users = new Users(req.body);
+			users.save(function(err, value) {
+				if (err)
+					res.send(err);
+				res.json(value);
+			})
+		});
 
 	app.route('/auth/')
 		.post((req, res) => {
