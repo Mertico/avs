@@ -13,56 +13,39 @@ var writeLog = (data, type='default') => {
 
 
 var isAuth = false;
+var userInfo = {};
 
+var models = {
+  auth: () => {
+    container.load('/templates/auth.html');
+  },
+  home: () => {
+    $.get("/templates/home.html", function( data ) {
+      let tmpl = _.template(data)({
+        user: userInfo.email,
+        projects: [
+          {firstName:"Homer", lastName:"Simpson", phone:"555-123-1234"},
+        ]
+      });
+      container.append(tmpl)
+    });
+  }
+}
+
+// Действия при загрузке
 $(function() {
-
   $.get( "/api/isAuth" )
   .done(function(data) {
     isAuth = true;
-    // $("body").load('/templates/auth.html');
+    userInfo = data.userInfo
     console.warn('Authentication:   Success ');
     writeLog(data, 'auth')
+    models.home(data);
   })
   .fail(function(data) {
     isAuth = false;
-    container.load('/templates/auth.html');
     console.warn('Authentication:   Failure ');
     writeLog(data, 'auth')
+    models.auth();
   });
 });
-
-
-// console.log(root.html(12));
-// // $.ajax({
-// //   url: "/users",
-// //   context: document.body,
-// //   dataType: "json",
-// // }).done(function() {
-// //   $( this ).addClass( "done" );
-// // });
-//
-// $.get( "/api/users", function( data ) {
-//   console.log("Get data: ",data);
-//   _.forEach(data, function callback(value, index) {
-//     div = $( "<div/>", {class: 'get'} )
-//       .appendTo(root)
-//     _.forEach(value, function callback(v, i,a) {
-//       $( "<div/>" )
-//         .html(i+": "+v + "")
-//         .appendTo(div)
-//     })
-//   })
-// }, "json" );
-//
-//
-// //, $( "#testform" ).serialize()
-// $.post( "/api/users", { email: "invalid", password: "1996" }, function( data ) {
-//   console.log("Post data: ",data);
-//   div = $( "<div/>", {class: 'post'} )
-//     .appendTo(root)
-//   _.forEach(data, function callback(value, index) {
-//     $( "<div/>" )
-//       .html(index +": "+ value + "")
-//       .appendTo(div)
-//   })
-// }, "json" );

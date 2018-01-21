@@ -4,39 +4,29 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-module.exports = mongoose.model('ProjectTags', ProjectTagsSchema);
-var ProjectRoleSchema = new Schema(
+
+var ProjectTasksSchema = new Schema(
 {
-  name: { type: String, required: true },
-  people: { type: Number, required: true },
-  time: { type: Number, required: true },
-  price: { type: Number, required: true },
-  discount: { type: Number, required: true }
+  id: { type: Schema.Types.ObjectId, ref: 'tasks', required: true },
+  value: { type: Number, required: true }
 });
-module.exports = mongoose.model('ProjectRole', ProjectRoleSchema);
+module.exports = mongoose.model('ProjectTasks', ProjectTasksSchema);
+
 var ProjectContactsSchema = new Schema(
 {
-  customer: {
-    name: { type: String, required: true },
-    official_name: { type: String, required: true },
-    mail: { type: String, required: true },
-    phone: { type: String, required: true }
-  },
-  performer: {
-    name: { type: String, required: true },
-    official_name: { type: String, required: true },
-    mail: { type: String, required: true },
-    phone: { type: String, required: true }
-  }
+  firstName: { type: String, required: true },
+  secondName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  mail: { type: String, required: true },
+  phone: { type: String, required: true }
 });
 module.exports = mongoose.model('ProjectContacts', ProjectContactsSchema);
+
 var ProjectSchema = new Schema(
 {
   name: { type: String, required: true },
-  id_user: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-  stage: [{ type: Schema.Types.ObjectId, ref: 'stage', required: true }],
-  tags: [{ type: Schema.Types.ObjectId, ref: 'tags', required: true }],
-  role: [ProjectRoleSchema],
-  contacts: [ProjectContactsSchema]
+  contacts: ProjectContactsSchema,
+  tasks: [ProjectTasksSchema],
+  discount: { type: Number, required: true }
 });
 module.exports = mongoose.model('Project', ProjectSchema);

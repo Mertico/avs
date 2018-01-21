@@ -6,6 +6,7 @@ var route = {
     }
     $.post( "/api/auth", data, function( data ) {
       writeLog(data, 'post')
+      header('Location: http://localhost:9080/');
     }, "json" )
     .fail(function(data) {
       writeLog(data, 'post')

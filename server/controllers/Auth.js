@@ -13,6 +13,9 @@ module.exports = function(app) {
         res.status(400).send(err);
       if (value.length == 1) {
         req.isAuth = true
+        req.userInfo = value[0]
+        req.userInfo.password = undefined
+        
         console.log('Authentication: ',"\x1b[32m",'Success',"\x1b[0m", req.cookies.email);
         next();
       } else {
@@ -36,7 +39,7 @@ module.exports = function(app) {
   // isAuth???
 	app.route('/isAuth/')
 		.get((req, res) => {
-			res.status(200).json({ message: 'Authorization' });
+			res.status(200).json({ message: 'Authorization' , userInfo: req.userInfo});
 		})
 
 	// New user
