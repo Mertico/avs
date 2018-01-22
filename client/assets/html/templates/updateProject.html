@@ -1,6 +1,6 @@
-<div class="container auth">
+<div class="container update">
   <section id="content">
-    <h1>Добавление проекта</h1>
+    <h1>Изменение проекта</h1>
     <form id="form" action="#">
       <fieldset>
         <legend>Проект</legend>
@@ -17,6 +17,7 @@
       </fieldset>
       <fieldset>
         <legend>Оказываемые услуги</legend>
+        <button onclick="javascript:models.addTaskInProject();" type="button">Добавить услугу</button>
         <table class="table">
           <thead>
           <tr>
@@ -27,13 +28,13 @@
           </tr>
           </thead>
           <tbody>
-          <% _.each( res.tasks, function(i) {%>
+          <% _.each( res.tasks, function(i, key) {%>
             <tr>
               <td><%= i._id %></td>
               <td><%= i.value %></td>
               <td><%= i.value %></td>
               <td>
-                <button onclick="javascript:models.removeTaskInProject('<%= res._id %>', '<%= i._id %>');">Удалить</button>
+                <button onclick="javascript:models.removeTaskInProject('<%= key %>');" type="button">Удалить</button>
               </td>
             </tr>
           <% }); %>

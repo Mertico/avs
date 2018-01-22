@@ -4,7 +4,7 @@
     <span class="home_user"><span>Пользователь:</span><%-user%></span>
     <h1>
       Проекты
-      <button onclick="javascript:models.addProject();">Добавить проект</button>
+      <button onclick="javascript:models.addProject();" type="button">Добавить проект</button>
     </h1>
     <table class="table">
       <thead>
@@ -22,8 +22,8 @@
           <td><%= i.contacts.lastName %> <%= i.contacts.firstName %></td>
           <td><%= i.contacts.phone %></td>
           <td>
-            <button onclick="javascript:models.removeProject('<%= i._id %>');">Удалить</button>
-            <button onclick="javascript:models.updateProject('<%= i._id %>');">Изменить</button>
+            <button onclick="javascript:models.removeProject('<%= i._id %>');" type="button">Удалить</button>
+            <button onclick="javascript:models.updateProject('<%= i._id %>');" type="button">Изменить</button>
           </td>
         </tr>
       <% }); %>
@@ -32,7 +32,7 @@
     <br/><br/>
     <h1>
       Каталог услуг
-      <button onclick="javascript:models.addTask();">Добавить услугу</button>
+      <button onclick="javascript:models.addTask();" type="button">Добавить услугу</button>
     </h1>
     <table class="table">
       <thead>
@@ -56,8 +56,8 @@
               <td><%= i.hours %></td>
               <td><%= i.hours*profession[i.type].cost %></td>
               <td>
-                <button onclick="javascript:models.removeProject('<%= i._id %>');">Удалить</button>
-                <button onclick="javascript:models.updateProject('<%= i._id %>');">Изменить</button>
+                <button onclick="javascript:models.removeProject('<%= i._id %>');" type="button">Удалить</button>
+                <button onclick="javascript:models.updateProject('<%= i._id %>');" type="button">Изменить</button>
               </td>
             </tr>
           <% }%>

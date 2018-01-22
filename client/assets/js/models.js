@@ -70,8 +70,17 @@ var models = {
         let tmpl = _.template(data)({
           res
         });
-        container.append(tmpl)
+        container.empty().append(tmpl)
       });
+    });
+  },
+
+  addTask: () => {
+    $.get("/templates/addTask.html", function( data ) {
+      let tmpl = _.template(data)({
+        profession
+      });
+      container.empty().append(tmpl)
     });
   },
 

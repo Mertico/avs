@@ -1,0 +1,20 @@
+<div class="container add">
+  <section id="content">
+    <h1>Добавление услуги</h1>
+    <form id="form" action="#">
+      <fieldset>
+        <legend>Параметры</legend>
+        <input value="1996" placeholder="Название" name="name" type="text" required autofocus>
+        <input value="1996" placeholder="Время" name="hours" type="text" required>
+        <select name="type">
+          <option disabled selected>Выберите исполнителя</option>
+          <% _.each( profession, function(value, key) {%>
+            <option value="<%= key %>"><%= value.name %> (<%= value.cost %>)</option>
+          <% }); %>
+        </select>
+      </fieldset>
+      <button onclick="javascript:route.addTaskConfirm();" type="button">Добавить проект</button>
+    </form>
+ </section>
+</div>
+</div>
