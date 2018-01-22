@@ -14,6 +14,24 @@ var writeLog = (data, type='default') => {
 
 var isAuth = false;
 var userInfo = {};
+var profession = [
+  {
+    name: "Аналитик",
+    cost: 100
+  },
+  {
+    name: "Дизайнер",
+    cost: 120
+  },
+  {
+    name: "Разработчик",
+    cost: 250
+  },
+  {
+    name: "Верстальщик",
+    cost: 150
+  }
+]
 
 var models = {
   auth: () => {
@@ -22,13 +40,22 @@ var models = {
   home: () => {
     $.get("/templates/home.html", function( data ) {
       $.get( "/api/project" )
-      .done(function(res) {
-        console.log(res);
-        let tmpl = _.template(data)({
-          user: userInfo.email,
-          projects: res
+      .done(function(project) {
+        console.log(project);
+
+        $.get( "/api/task" )
+        .done(function(task) {
+          console.log(task);
+
+          let tmpl = _.template(data)({
+            user: userInfo.email,
+            projects: project,
+            tasks: task,
+            profession: profession
+          });
+          container.append(tmpl)
         });
-        container.append(tmpl)
+
       });
     });
   },

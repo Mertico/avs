@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 // Models
 require('./models/Users');
 require('./models/Project');
+require('./models/Task');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/api', {
@@ -34,6 +35,7 @@ require('./controllers/Auth')(app);
 // Routes
 require('./controllers/Users')(app);
 require('./controllers/Project')(app);
+require('./controllers/Task')(app);
 
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})

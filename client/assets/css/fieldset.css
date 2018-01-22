@@ -1,0 +1,16 @@
+:root {
+  --blue: #039;
+}
+fieldset {
+  border: 2px solid var(--blue);
+  padding: 1.6rem;
+}
+
+fieldset legend {
+  border: none;
+  width: auto;
+  color: var(--blue);
+  font-size: 1.8rem;
+  padding: 0 1rem;
+  margin: 0 auto 0 0;
+}

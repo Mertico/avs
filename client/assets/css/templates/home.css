@@ -1,0 +1,12 @@
+.home_user {
+  font-size: 1.8rem;
+  font-style: italic;
+  margin: 1rem 0;
+  display: inline-block;
+}
+.home_user span {
+  margin-right: 0.5rem;
+  display: inline-block;
+  font-style: normal;
+  font-weight: bold;
+}

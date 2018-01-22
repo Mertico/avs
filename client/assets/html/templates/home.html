@@ -1,7 +1,7 @@
 <div class="container home">
   <section id="content">
 
-    <span class="home_user"><%-user%></span>
+    <span class="home_user"><span>Пользователь:</span><%-user%></span>
     <h1>
       Проекты
       <button onclick="javascript:models.addProject();">Добавить проект</button>
@@ -22,11 +22,46 @@
           <td><%= i.contacts.lastName %> <%= i.contacts.firstName %></td>
           <td><%= i.contacts.phone %></td>
           <td>
-            <button onclick="javascript:models.removeProject('<%= i._id %>');">Удалить проект</button>
-            <button onclick="javascript:models.updateProject('<%= i._id %>');">Изменить проект</button>
+            <button onclick="javascript:models.removeProject('<%= i._id %>');">Удалить</button>
+            <button onclick="javascript:models.updateProject('<%= i._id %>');">Изменить</button>
           </td>
         </tr>
       <% }); %>
+      </tbody>
+    </table>
+    <br/><br/>
+    <h1>
+      Каталог услуг
+      <button onclick="javascript:models.addTask();">Добавить услугу</button>
+    </h1>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Название</th>
+        <th>Время</th>
+        <th>Стоимость</th>
+        <th>Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+
+        <% _.each(_.uniqBy(tasks, 'type'), function(i) {%>
+          <tr>
+            <th colspan="4"><%= profession[i.type].name %></th>
+          </tr>
+        <% _.each( tasks, function(d) {%>
+          <%  if (i.type == d.type) {%>
+            <tr>
+              <td><%= i.name %></td>
+              <td><%= i.hours %></td>
+              <td><%= i.hours*profession[i.type].cost %></td>
+              <td>
+                <button onclick="javascript:models.removeProject('<%= i._id %>');">Удалить</button>
+                <button onclick="javascript:models.updateProject('<%= i._id %>');">Изменить</button>
+              </td>
+            </tr>
+          <% }%>
+        <% })}); %>
       </tbody>
     </table>
 
