@@ -1,0 +1,29 @@
+:root {
+  --blue: #039;
+}
+
+table {
+    font-size: 12px;
+    background: #fff;
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+
+table th {
+    font-size: 14px;
+    font-weight: normal;
+    color: var(--blue);
+    border-bottom: 2px solid #6678b1;
+    padding: 10px 8px;
+}
+
+table td {
+    border-bottom: 1px solid #ccc;
+    color: #669;
+    padding: 6px 8px;
+}
+
+table tbody tr:hover td {
+    color: var(--blue);
+}

@@ -1,0 +1,47 @@
+<div class="container auth">
+  <section id="content">
+    <h1>Добавление проекта</h1>
+    <form id="form" action="#">
+      <fieldset>
+        <legend>Проект</legend>
+        <input value="<%= res.name %>" placeholder="Название" name="name" type="text" required autofocus>
+        <input value="<%= res.discount %>" placeholder="Скидка" name="discount" type="text" required>
+      </fieldset>
+      <fieldset>
+        <legend>Контакты клиента</legend>
+        <input value="<%= res.contacts.firstName %>" placeholder="Имя" name="firstName" type="text" required>
+        <input value="<%= res.contacts.secondName %>" placeholder="Отчество" name="secondName" type="text" required>
+        <input value="<%= res.contacts.lastName %>" placeholder="Фамилия" name="lastName" type="text" required>
+        <input value="<%= res.contacts.mail %>" placeholder="Почта" name="mail" type="text" required>
+        <input value="<%= res.contacts.phone %>" placeholder="Телефон" name="phone" type="text" required>
+      </fieldset>
+      <fieldset>
+        <legend>Оказываемые услуги</legend>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Название</th>
+            <th>Стоимость</th>
+            <th>Кол-во</th>
+            <th>Действия</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% _.each( res.tasks, function(i) {%>
+            <tr>
+              <td><%= i._id %></td>
+              <td><%= i.value %></td>
+              <td><%= i.value %></td>
+              <td>
+                <button onclick="javascript:models.removeTaskInProject('<%= res._id %>', '<%= i._id %>');">Удалить</button>
+              </td>
+            </tr>
+          <% }); %>
+          </tbody>
+        </table>
+      </fieldset>
+      <button onclick="javascript:route.updateProjectConfirm('<%= res._id %>');" type="button">Сохранить изменения</button>
+    </form>
+ </section>
+</div>
+</div>

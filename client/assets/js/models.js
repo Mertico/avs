@@ -21,15 +21,33 @@ var models = {
   },
   home: () => {
     $.get("/templates/home.html", function( data ) {
-      let tmpl = _.template(data)({
-        user: userInfo.email,
-        projects: [
-          {firstName:"Homer", lastName:"Simpson", phone:"555-123-1234"},
-        ]
+      $.get( "/api/project" )
+      .done(function(res) {
+        console.log(res);
+        let tmpl = _.template(data)({
+          user: userInfo.email,
+          projects: res
+        });
+        container.append(tmpl)
       });
-      container.append(tmpl)
     });
-  }
+  },
+  addProject: () => {
+    container.load('/templates/addProject.html');
+  },
+  updateProject: (id) => {
+    $.get("/templates/updateProject.html", function( data ) {
+      $.get( "/api/project/"+id )
+      .done(function(res) {
+        console.log(res);
+        let tmpl = _.template(data)({
+          res
+        });
+        container.append(tmpl)
+      });
+    });
+  },
+
 }
 
 // Действия при загрузке

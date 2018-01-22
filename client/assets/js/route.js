@@ -6,7 +6,7 @@ var route = {
     }
     $.post( "/api/auth", data, function( data ) {
       writeLog(data, 'post')
-      header('Location: http://localhost:9080/');
+      location.reload(true);
     }, "json" )
     .fail(function(data) {
       writeLog(data, 'post')
@@ -24,6 +24,40 @@ var route = {
     .fail(function(data) {
       writeLog(data, 'post')
     })
-  }
+  },
+
+  addProjectConfirm: () => {
+    var dataForm = $('#form').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    var data = {
+      name: dataForm.name,
+      discount: dataForm.discount,
+      contacts: {
+        firstName: dataForm.firstName,
+        secondName: dataForm.secondName,
+        lastName: dataForm.lastName,
+        mail: dataForm.mail,
+        phone: dataForm.phone
+      }
+    }
+    $.post( "/api/project", data, function(res) {
+      writeLog(res, 'post')
+      if (res.errors) {
+        //Отрабоать ошибочные поля
+      } else {
+        location.reload(true);
+      }
+    }, "json" )
+    .fail(function(res) {
+      writeLog(res, 'post')
+    })
+  },
+
 }
 // routeAuth();
+// var data = $('#form').serializeArray().reduce(function(obj, item) {
+//     obj[item.name] = item.value;
+//     return obj;
+// }, {});

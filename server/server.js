@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 
 // Models
 require('./models/Users');
+require('./models/Project');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/api', {
@@ -32,6 +33,7 @@ require('./controllers/Auth')(app);
 
 // Routes
 require('./controllers/Users')(app);
+require('./controllers/Project')(app);
 
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})

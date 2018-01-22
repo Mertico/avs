@@ -2,10 +2,10 @@
   <section id="content">
 
     <span class="home_user"><%-user%></span>
-    <span class="home_projects">
+    <h1>
       Проекты
-      <a href="#">Добавить проект</a>
-    </span>
+      <button onclick="javascript:models.addProject();">Добавить проект</button>
+    </h1>
     <table class="table">
       <thead>
       <tr>
@@ -19,9 +19,12 @@
       <% _.each( projects, function(i) {%>
         <tr>
           <td><%= i.name %></td>
-          <td><%= i.lastName %>, <%= i.firstName %></td>
-          <td><%= i.phone %></td>
-          <td>123</td>
+          <td><%= i.contacts.lastName %> <%= i.contacts.firstName %></td>
+          <td><%= i.contacts.phone %></td>
+          <td>
+            <button onclick="javascript:models.removeProject('<%= i._id %>');">Удалить проект</button>
+            <button onclick="javascript:models.updateProject('<%= i._id %>');">Изменить проект</button>
+          </td>
         </tr>
       <% }); %>
       </tbody>
