@@ -1,6 +1,6 @@
 <div class="container update">
   <section id="content">
-    <h1>Изменение проекта</h1>
+    <h1>Изменение проекта<button onclick="javascript:models.home();" type="button">На главную</button></h1>
     <form id="form" action="#">
       <fieldset>
         <legend>Проект</legend>
@@ -17,24 +17,23 @@
       </fieldset>
       <fieldset>
         <legend>Оказываемые услуги</legend>
-        <button onclick="javascript:models.addTaskInProject();" type="button">Добавить услугу</button>
+        <button onclick="javascript:models.project.addTaskInProject();" type="button">Добавить услугу</button>
         <table class="table">
           <thead>
           <tr>
             <th>Название</th>
-            <th>Стоимость</th>
             <th>Кол-во</th>
             <th>Действия</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="taskInProject">
           <% _.each( res.tasks, function(i, key) {%>
-            <tr>
+            <% let uniqId = _.uniqueId('row_')%>
+            <tr uniqId="<%= uniqId%>">
               <td><%= i._id %></td>
               <td><%= i.value %></td>
-              <td><%= i.value %></td>
               <td>
-                <button onclick="javascript:models.removeTaskInProject('<%= key %>');" type="button">Удалить</button>
+                <button onclick="javascript:models.project.removeTaskInProject(`'<%= uniqId %>'`);" type="button">Удалить</button>
               </td>
             </tr>
           <% }); %>

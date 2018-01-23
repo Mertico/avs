@@ -22,7 +22,7 @@
           <td><%= i.contacts.lastName %> <%= i.contacts.firstName %></td>
           <td><%= i.contacts.phone %></td>
           <td>
-            <button onclick="javascript:models.removeProject('<%= i._id %>');" type="button">Удалить</button>
+            <button class="red" onclick="javascript:models.removeProject('<%= i._id %>');" type="button">Удалить</button>
             <button onclick="javascript:models.updateProject('<%= i._id %>');" type="button">Изменить</button>
           </td>
         </tr>
@@ -56,8 +56,8 @@
               <td><%= i.hours %></td>
               <td><%= i.hours*profession[i.type].cost %></td>
               <td>
-                <button onclick="javascript:models.removeProject('<%= i._id %>');" type="button">Удалить</button>
-                <button onclick="javascript:models.updateProject('<%= i._id %>');" type="button">Изменить</button>
+                <button class="red" onclick="javascript:models.removeTask('<%= i._id %>');" type="button">Удалить</button>
+                <button onclick="javascript:models.updateTask('<%= i._id %>');" type="button">Изменить</button>
               </td>
             </tr>
           <% }%>

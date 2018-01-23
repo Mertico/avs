@@ -26,6 +26,8 @@ var route = {
     })
   },
 
+
+  // Project
   addProjectConfirm: () => {
     var dataForm = $('#form').serializeArray().reduce(function(obj, item) {
         obj[item.name] = item.value;
@@ -54,6 +56,86 @@ var route = {
       writeLog(res, 'post')
     })
   },
+  removeProjectConfirm: (id) => {
+    $.ajax({
+      type: 'DELETE',
+      dataType: 'json',
+      url: "/api/project/"+id,
+      data: dataForm
+    }).done(function(res) {
+      writeLog(res, 'put')
+      if (res.errors) {
+        //Отработать ошибки
+      } else {
+        location.reload(true);
+      }
+    }, "json" )
+    .fail(function(res) {
+      writeLog(res, 'post')
+    })
+  },
+
+
+  // TASK
+  addTaskConfirm: () => {
+    var dataForm = $('#form').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    $.post( "/api/task", dataForm, function(res) {
+      writeLog(res, 'post')
+      if (res.errors) {
+        //Отрабоать ошибочные поля
+      } else {
+        location.reload(true);
+      }
+    }, "json" )
+    .fail(function(res) {
+      writeLog(res, 'post')
+    })
+  },
+  updateTaskConfirm: (id) => {
+    var dataForm = $('#form').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    $.ajax({
+      type: 'PUT',
+      dataType: 'json',
+      url: "/api/task/"+id,
+      data: dataForm
+    }).done(function(res) {
+      writeLog(res, 'put')
+      if (res.errors) {
+        //Отрабоать ошибочные поля
+      } else {
+        location.reload(true);
+      }
+    }, "json" )
+    .fail(function(res) {
+      writeLog(res, 'post')
+    })
+  },
+  removeTaskConfirm: (id) => {
+    $.ajax({
+      type: 'DELETE',
+      dataType: 'json',
+      url: "/api/task/"+id,
+      data: dataForm
+    }).done(function(res) {
+      writeLog(res, 'put')
+      if (res.errors) {
+        //Отработать ошибки
+      } else {
+        location.reload(true);
+      }
+    }, "json" )
+    .fail(function(res) {
+      writeLog(res, 'post')
+    })
+  },
+
+
 
 }
 // routeAuth();

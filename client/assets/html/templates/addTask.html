@@ -1,19 +1,19 @@
 <div class="container add">
   <section id="content">
-    <h1>Добавление услуги</h1>
+    <h1>Добавление услуги<button onclick="javascript:models.home();" type="button">На главную</button></h1>
     <form id="form" action="#">
       <fieldset>
         <legend>Параметры</legend>
         <input value="1996" placeholder="Название" name="name" type="text" required autofocus>
         <input value="1996" placeholder="Время" name="hours" type="text" required>
-        <select name="type">
+        <select name="type" required>
           <option disabled selected>Выберите исполнителя</option>
           <% _.each( profession, function(value, key) {%>
             <option value="<%= key %>"><%= value.name %> (<%= value.cost %>)</option>
           <% }); %>
         </select>
       </fieldset>
-      <button onclick="javascript:route.addTaskConfirm();" type="button">Добавить проект</button>
+      <button onclick="javascript:route.addTaskConfirm();" type="button">Добавить услугу</button>
     </form>
  </section>
 </div>

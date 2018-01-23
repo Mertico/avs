@@ -41,11 +41,11 @@ var models = {
     $.get("/templates/home.html", function( data ) {
       $.get( "/api/project" )
       .done(function(project) {
-        console.log(project);
+        writeLog(project, 'get')
 
         $.get( "/api/task" )
         .done(function(task) {
-          console.log(task);
+          writeLog(task, 'get')
 
           let tmpl = _.template(data)({
             user: userInfo.email,
@@ -53,11 +53,54 @@ var models = {
             tasks: task,
             profession: profession
           });
-          container.append(tmpl)
+          container.empty().append(tmpl)
         });
 
       });
     });
+  },
+  project: {
+    addTaskInProject: () => {
+      var place = $('#taskInProject');
+      console.log($('#taskInProject'));
+      $.get( "/api/task/")
+      .done(function(res,select) {
+        var select = '';
+
+        writeLog(res, 'get')
+        console.log(res);
+        select+='<select name="task" required>'
+        select+='<option disabled selected>Выберите задачу</option>'
+
+        _.each(_.uniqBy(res, 'type'), function(i) {
+          select+='<optgroup label="'+profession[i.type].name+'">'
+          // console.log(profession[i.type].name);
+          _.each( res, function(d) {
+            if (i.type == d.type) {
+                // console.log(i.name);
+                  select+='<option value="'+i._id+'">'+i.name+'   ('+i.hours*profession[i.type].cost+')</option>'
+            }
+          });
+          select+='</optgroup>'
+        });
+        let uniqId = _.uniqueId('row_')
+        let html = ''
+        html += '<tr uniqId="' + uniqId + '">'
+        html += '<td>'+select+'</td>'
+        html += '<td><input value="1" type="text" placeholder="Кол-во" name="value" required></td>'
+        html += '<td>'
+        html += '<button onclick="javascript:models.project.removeTaskInProject(`'+uniqId+'`);" type="button">Удалить</button>'
+        html += '</td>'
+        html += '</tr>'
+        place.append(html)
+      });
+    },
+    removeTaskInProject: (id) => {
+      var place = $('#taskInProject');
+      console.log($('#taskInProject'));
+      place.find('tr[uniqId='+id+']').remove()
+    },
+
   },
   addProject: () => {
     container.load('/templates/addProject.html');
@@ -66,7 +109,19 @@ var models = {
     $.get("/templates/updateProject.html", function( data ) {
       $.get( "/api/project/"+id )
       .done(function(res) {
-        console.log(res);
+        writeLog(res, 'get')
+        let tmpl = _.template(data)({
+          res
+        });
+        container.empty().append(tmpl)
+      });
+    });
+  },
+  removeProject: (id) => {
+    $.get("/templates/removeProject.html", function( data ) {
+      $.get( "/api/project/"+id )
+      .done(function(res) {
+        writeLog(res, 'get')
         let tmpl = _.template(data)({
           res
         });
@@ -81,6 +136,31 @@ var models = {
         profession
       });
       container.empty().append(tmpl)
+    });
+  },
+  updateTask: (id) => {
+    $.get("/templates/updateTask.html", function( data ) {
+      $.get( "/api/task/"+id )
+      .done(function(res) {
+        writeLog(res, 'get')
+        let tmpl = _.template(data)({
+          res,
+          profession
+        });
+        container.empty().append(tmpl)
+      });
+    });
+  },
+  removeTask: (id) => {
+    $.get("/templates/removeTask.html", function( data ) {
+      $.get( "/api/task/"+id )
+      .done(function(res) {
+        writeLog(res, 'get')
+        let tmpl = _.template(data)({
+          res
+        });
+        container.empty().append(tmpl)
+      });
     });
   },
 

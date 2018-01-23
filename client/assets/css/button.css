@@ -1,5 +1,6 @@
 :root {
   --blue: #039;
+  --red: #c30;
 }
 button {
   box-sizing: border-box;
@@ -22,9 +23,11 @@ button {
   font-weight: 700;
 }
 
-button:hover,
-button:focus {
+button:hover{
   color: #fff;
+  outline: 0;
+}
+button:focus {
   outline: 0;
 }
 
@@ -57,4 +60,31 @@ button:hover {
 }
 button:hover:after {
   width: 110%;
+}
+
+
+
+button.red {
+  border: 2px solid var(--red);
+  color: var(--red);
+
+}
+button.red:hover{
+  color: #fff;
+  outline: 0;
+}
+button.red:focus {
+  outline: 0;
+}
+
+button.red:hover {
+    color: #fff;
+}
+
+button.red {
+  border-color: var(--red);
+  color: var(--red);
+}
+button.red:after {
+  background: var(--red);
 }

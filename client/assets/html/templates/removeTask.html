@@ -1,0 +1,12 @@
+<div class="container remove">
+  <section id="content">
+    <h1>Удаление услуги<button onclick="javascript:models.home();" type="button">На главную</button></h1>
+    <form id="form" action="#">
+      <fieldset>
+        <span>Вы уверены что хотите удалить &laquo;<%= res.name %>&raquo;?</span>
+      </fieldset>
+      <button class="red" onclick="javascript:route.removeTaskConfirm('<%= res._id %>');" type="button">Удалить</button>
+    </form>
+ </section>
+</div>
+</div>

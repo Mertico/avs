@@ -1,5 +1,6 @@
 :root {
   --blue: #039;
+  --red: #c30;
 }
 
 table {
@@ -26,4 +27,11 @@ table td {
 
 table tbody tr:hover td {
     color: var(--blue);
+}
+.home table tr td:last-child {
+  width: 0;
+  white-space: nowrap;
+}
+.home table tr td:not(:last-child) {
+  width: 30%;
 }

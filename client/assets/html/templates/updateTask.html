@@ -1,0 +1,21 @@
+<div class="container update">
+  <section id="content">
+    <h1>Изменение услуги<button onclick="javascript:models.home();" type="button">На главную</button></h1>
+    <form id="form" action="#">
+      <fieldset>
+        <legend>Параметры</legend>
+        <input value="<%= res.name %>" placeholder="Название" name="name" type="text" required autofocus>
+        <input value="<%= res.hours %>" placeholder="Время" name="hours" type="text" required>
+        <select name="type" required>
+          <option disabled>Выберите исполнителя</option>
+          <% _.each( profession, function(value, key) {%>
+            <% let select = (res.type == key) ? 'selected' : ''; %>
+            <option value="<%= key %>" <%= select %>><%= value.name %> (<%= value.cost %>)</option>
+          <% }); %>
+        </select>
+      </fieldset>
+      <button onclick="javascript:route.updateTaskConfirm('<%= res._id %>');" type="button">Сохранить изменения</button>
+    </form>
+ </section>
+</div>
+</div>
