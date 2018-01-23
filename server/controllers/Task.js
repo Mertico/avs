@@ -2,42 +2,42 @@
 
 module.exports = function(app) {
 	var mongoose = require('mongoose'),
-	    Users = mongoose.model('Task');
+	    Task = mongoose.model('Task');
 	// List Routes
 	app.route('/task/')
 		.get((req, res) => {
-			Users.find({}, function(err, value) {
+			Task.find({}, function(err, value) {
 		    if (err)
 		      res.send(err);
 		    res.json(value);
 		  })
 		})
 		.post((req, res) => {
-			var users = new Users(req.body);
-		  users.save(function(err, value) {
+			var tasks = new Task(req.body);
+		  tasks.save(function(err, value) {
 		    if (err)
 		      res.send(err);
 		    res.json(value);
 		  })
 		});
-	app.route('/task/:userId')
+	app.route('/task/:taskId')
 		.get((req, res) => {
-			Users.findById({ _id: req.params.userId }, function(err, value) {
+			Task.findById({ _id: req.params.taskId }, function(err, value) {
 		    if (err)
 		      res.send(err);
 		    res.json(value);
 		  })
 		})
 		.put((req, res) => {
-			Users.findOneAndUpdate({ _id: req.params.userId }, req.body, function(err, value) {
+			Task.findOneAndUpdate({ _id: req.params.taskId }, req.body, function(err, value) {
 		    if (err)
 		      res.send(err);
 		    res.json(value);
 	  	})
 		})
 		.delete((req, res) => {
-			Users.remove({
-		    _id: req.params.userId
+			Task.remove({
+		    _id: req.params.taskId
 		  }, function(err, value) {
 		    if (err)
 		      res.send(err);

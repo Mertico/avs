@@ -29,8 +29,8 @@
           <tbody id="taskInProject">
           <% _.each( res.tasks, function(i, key) {%>
             <% let uniqId = _.uniqueId('row_')%>
-            <tr uniqId="<%= uniqId%>">
-              <td><%= i._id %></td>
+            <tr uniqId="<%= uniqId%>" taskId="<%= i.id%>" taskValue="<%= i.value%>">
+              <td><%= i.name %></td>
               <td><%= i.value %></td>
               <td>
                 <button onclick="javascript:models.project.removeTaskInProject(`'<%= uniqId %>'`);" type="button">Удалить</button>

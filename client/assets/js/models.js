@@ -4,11 +4,13 @@ var global_log = $( "<div/>", {class: 'global_log'}).appendTo(root);
 var container = $( "<div/>", {class: 'container'}).appendTo(root);
 
 var writeLog = (data, type='default') => {
+  console.group('Connect');
   console.log(data);
   div = $( "<div/>", {class: "default "+type} )
     .html(JSON.stringify(data))
     .appendTo(global_log)
   console.log(div);
+  console.groupEnd('Connect');
 }
 
 
@@ -69,7 +71,7 @@ var models = {
 
         writeLog(res, 'get')
         console.log(res);
-        select+='<select name="task" required>'
+        select+='<select required>'
         select+='<option disabled selected>Выберите задачу</option>'
 
         _.each(_.uniqBy(res, 'type'), function(i) {
@@ -87,7 +89,7 @@ var models = {
         let html = ''
         html += '<tr uniqId="' + uniqId + '">'
         html += '<td>'+select+'</td>'
-        html += '<td><input value="1" type="text" placeholder="Кол-во" name="value" required></td>'
+        html += '<td><input value="1" type="text" placeholder="Кол-во" required></td>'
         html += '<td>'
         html += '<button onclick="javascript:models.project.removeTaskInProject(`'+uniqId+'`);" type="button">Удалить</button>'
         html += '</td>'

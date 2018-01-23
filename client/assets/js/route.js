@@ -56,6 +56,55 @@ var route = {
       writeLog(res, 'post')
     })
   },
+  updateProjectConfirm: (id) => {
+    var dataForm = $('#form').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    var tableTasks = $('#taskInProject tr[uniqId]');
+    var tasks = []
+    var isError = false
+    _.each(tableTasks, function(task, key) {
+      let id = ($(task).attr('taskId')) ? $(task).attr('taskId') :$(task).find('select').val()
+      let value = $(task).find('input').val()-0 | $(task).attr('taskValue')-0
+      if(id == null || value == '' || value < 1) {
+        isError = true
+      } else {
+        tasks.push({id, value})
+      }
+    })
+    var data = {
+      name: dataForm.name,
+      discount: dataForm.discount,
+      contacts: {
+        firstName: dataForm.firstName,
+        secondName: dataForm.secondName,
+        lastName: dataForm.lastName,
+        mail: dataForm.mail,
+        phone: dataForm.phone
+      },
+      tasks: tasks
+    }
+
+    // console.log(data,isError);
+    $.ajax({
+      type: 'PUT',
+      dataType: 'json',
+      url: "/api/project/"+id,
+      data: data
+    }).done(function(res) {
+      console.log(res);
+      writeLog(res, 'put')
+      if (res.errors) {
+        //Отработать ошибочные поля
+      } else {
+        location.reload(true);
+      }
+    }, "json" )
+    .fail(function(res) {
+      writeLog(res, 'post')
+    })
+  },
   removeProjectConfirm: (id) => {
     $.ajax({
       type: 'DELETE',

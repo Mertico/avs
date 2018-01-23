@@ -15,7 +15,7 @@ module.exports = function(app) {
         req.isAuth = true
         req.userInfo = value[0]
         req.userInfo.password = undefined
-        
+
         console.log('Authentication: ',"\x1b[32m",'Success',"\x1b[0m", req.cookies.email);
         next();
       } else {
@@ -25,12 +25,11 @@ module.exports = function(app) {
     })
   });
   app.use(function (req, res, next) {
-
     if (req.isAuth || req.path==='/auth' || req.path==='/auth/' || req.path==='/reg' || req.path==='/reg/') {
-      console.log("Route: ",req.path,"\x1b[32m",'Access',"\x1b[0m");
+      console.log("Route:	",req.method,'	',req.path,"\x1b[32m",'Access',"\x1b[0m");
       next();
     } else {
-      console.log("Route: ",req.path,"\x1b[32m",'Blocked',"\x1b[0m");
+      console.log("Route:	",req.method,'	',req.path,"\x1b[32m",'Blocked',"\x1b[0m");
       res.status(403).send({ message: 'Error 403 Forbidden' });
     }
   });

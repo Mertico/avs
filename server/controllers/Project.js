@@ -4,7 +4,8 @@ module.exports = function(app) {
 	var mongoose = require('mongoose'),
 	    ProjectTasks = mongoose.model('ProjectTasks'),
 	    ProjectContacts = mongoose.model('ProjectContacts'),
-	    Project = mongoose.model('Project');
+	    Project = mongoose.model('Project'),
+    	Task = mongoose.model('Task');
 
 	// List Routes
 	app.route('/project/')
@@ -25,21 +26,28 @@ module.exports = function(app) {
 		});
 	app.route('/project/:projectId')
 		.get((req, res) => {
-			Project.findById({ _id: req.params.projectId }, function(err, value) {
-		    if (err)
-		      res.send(err);
-		    res.json(value);
+      var result;
+      var returnResult = (result) => {
+        if (!result)
+            res.send(errs);
+        res.json(result);
+      }
+
+      Project.findById({ _id: req.params.projectId }).exec(function(err, value) {
+        result = JSON.parse(JSON.stringify(value))
+        result.tasks.forEach(function(task, i,arr) {
+          Task.findById({ _id: task.id }).exec(function(err, v) {
+            result.tasks[i].name = v.name
+            result.tasks[i].type = v.type
+            result.tasks[i].hours = v.hours
+            if(i+1 == arr.length)
+              returnResult(result)
+          })
+        })
 		  })
 		})
 		.put((req, res) => {
-			Project.findOneAndUpdate({ _id: req.params.projectId }, req.body, {new: true}, function(err, value) {
-		    if (err)
-		      res.send(err);
-		    res.json(value);
-		  })
-		})
-		.post((req, res) => {
-			Project.findOneAndUpdate({ _id: req.params.projectId }, {$push: {stage: {name:req.body.name}}}, function(err, value) {
+      Project.findOneAndUpdate({ _id: req.params.projectId }, { $set:req.body },{new: true}, function(err, value) {
 		    if (err)
 		      res.send(err);
 		    res.json(value);

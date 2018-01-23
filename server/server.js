@@ -38,6 +38,7 @@ require('./controllers/Project')(app);
 require('./controllers/Task')(app);
 
 app.use(function(req, res) {
+  console.log(req.originalUrl + ' not found');
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
