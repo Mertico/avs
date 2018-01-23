@@ -25,7 +25,7 @@ module.exports = function(app) {
     })
   });
   app.use(function (req, res, next) {
-    if (req.isAuth || req.path==='/auth' || req.path==='/auth/' || req.path==='/reg' || req.path==='/reg/') {
+    if (req.isAuth || req.path==='/auth' || req.path==='/auth/' || req.path==='/reg' || req.path==='/reg/' || req.path==='/project' || req.path==='/project/' ) {
       console.log("Route:	",req.method,'	',req.path,"\x1b[32m",'Access',"\x1b[0m");
       next();
     } else {

@@ -24,6 +24,7 @@
           <td>
             <button class="red" onclick="javascript:models.removeProject('<%= i._id %>');" type="button">Удалить</button>
             <button onclick="javascript:models.updateProject('<%= i._id %>');" type="button">Изменить</button>
+            <a target="_blank" href="/print.html?<%= i._id %>"><button type="button">Печать</button></a>
           </td>
         </tr>
       <% }); %>

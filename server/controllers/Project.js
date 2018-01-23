@@ -35,15 +35,19 @@ module.exports = function(app) {
 
       Project.findById({ _id: req.params.projectId }).exec(function(err, value) {
         result = JSON.parse(JSON.stringify(value))
-        result.tasks.forEach(function(task, i,arr) {
-          Task.findById({ _id: task.id }).exec(function(err, v) {
-            result.tasks[i].name = v.name
-            result.tasks[i].type = v.type
-            result.tasks[i].hours = v.hours
-            if(i+1 == arr.length)
-              returnResult(result)
+        if(result.tasks.length > 0) {
+          result.tasks.forEach(function(task, i,arr) {
+            Task.findById({ _id: task.id }).exec(function(err, v) {
+              result.tasks[i].name = v.name
+              result.tasks[i].type = v.type
+              result.tasks[i].hours = v.hours
+              if(i+1 == arr.length)
+                returnResult(result)
+            })
           })
-        })
+        } else {
+          returnResult(result)
+        }
 		  })
 		})
 		.put((req, res) => {

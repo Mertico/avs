@@ -1,0 +1,104 @@
+<style>
+.contacts {
+  display: inline-block;
+  width: 46%;
+}
+table,table * {
+  border: 1px solid #000;
+}
+legend {
+  padding: 0 4px;
+  background: #fff;
+}
+fieldset {
+  margin: 2px 0;
+}
+button {
+  font-size: 36px;
+}
+@media (max-width: 840px) {
+  .contacts {
+    float: inherit !important;
+    display: block;
+    width: auto;
+  }
+}
+@media print {
+  button {
+    display: none;
+  }
+}
+</style>
+<div class="container update">
+  <section id="content">
+    <fieldset>
+      <legend>Проект</legend>
+      <div>Название: <%= res.name %></div>
+    </fieldset>
+    <fieldset class="contacts">
+      <legend>Контакты клиента</legend>
+      <div>Имя: <%= res.contacts.firstName %></div>
+      <div>Отчество: <%= res.contacts.secondName %></div>
+      <div>Фамилия: <%= res.contacts.lastName %></div>
+      <div>Почта: <%= res.contacts.mail %></div>
+      <div>Телефон: <%= res.contacts.phone %></div>
+    </fieldset>
+    <fieldset class="contacts" style="float:right">
+      <legend>Контакты компании</legend>
+      <div>Имя: Игорь</div>
+      <div>Отчество: Иванович</div>
+      <div>Фамилия: Иванов</div>
+      <div>Почта: ivan@ivanov.ru</div>
+      <div>Телефон: +7 (123) 456-78-90</div>
+    </fieldset>
+    <fieldset>
+      <legend>Оказываемые услуги</legend>
+          <table class="table" cellspacing="0">
+            <thead>
+            <tr>
+              <th>Название</th>
+              <th>Время</th>
+              <th>Стоимость</th>
+            </tr>
+            </thead>
+            <tbody>
+              <% let allCost = 0 %>
+              <% _.each(_.uniqBy(res.tasks, 'type'), function(i) {%>
+                <tr>
+                  <th colspan="4"><%= profession[i.type].name %></th>
+                </tr>
+              <% _.each( res.tasks, function(d) {%>
+                <%  if (i.type == d.type) {%>
+                  <% allCost += i.hours*profession[i.type].cost %>
+                  <tr>
+                    <td><%= i.name %></td>
+                    <td><%= i.hours %></td>
+                    <td><%= i.hours*profession[i.type].cost %></td>
+                  </tr>
+                <% }%>
+              <% })}); %>
+            </tbody>
+          </table>
+
+    </fieldset>
+    <fieldset>
+      <legend>Расчетная стоимость</legend>
+      <div>Скидка: <%= res.discount  %></div>
+      <div>Конечная стоимость: <%= allCost-res.discount  %></div>
+    </fieldset>
+
+    <fieldset class="contacts">
+      <div>Клиент</div>
+      <div>Дата: _____________________________</div>
+      <div>Подпись: ________________________/___________</div>
+    </fieldset>
+    <fieldset class="contacts" style="float:right">
+      <div>Компания</div>
+      <div>Дата: _____________________________</div>
+      <div>Подпись: ________________________/___________</div>
+    </fieldset>
+    <button onclick="javascript:window.print();" type="button">Печать</button>
+
+ </section>
+</div>
+</div>

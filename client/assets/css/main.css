@@ -20,3 +20,7 @@ h1 button {
   align-self: flex-end;
   margin-left: auto;
 }
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
