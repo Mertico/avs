@@ -66,6 +66,7 @@ button {
             </thead>
             <tbody>
               <% let allCost = 0 %>
+              <% let allHours = 0 %>
               <% _.each(_.uniqBy(res.tasks, 'type'), function(i) {%>
                 <tr>
                   <th colspan="4"><%= profession[i.type].name %></th>
@@ -73,6 +74,7 @@ button {
               <% _.each( res.tasks, function(d) {%>
                 <%  if (i.type == d.type) {%>
                   <% allCost += d.hours*profession[d.type].cost %>
+                  <% allHours += d.hours %>
                   <tr>
                     <td><%= d.name %></td>
                     <td><%= d.hours %></td>
@@ -85,9 +87,10 @@ button {
 
     </fieldset>
     <fieldset>
-      <legend>Расчетная стоимость</legend>
+      <legend>Расчет</legend>
       <div>Скидка: <%= res.discount  %></div>
       <div>Конечная стоимость: <%= allCost-res.discount  %></div>
+      <div>Предполгаемый срок реализации: <%= (allHours/8)|0 %> д <%= allHours%8 %>ч</div>
     </fieldset>
 
     <fieldset class="contacts">

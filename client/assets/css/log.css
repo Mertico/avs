@@ -1,4 +1,5 @@
 .global_log {
+  display: none;
   font-size: 1.0rem;
   font-family: monospace;
   word-break: break-all;
