@@ -50,7 +50,7 @@ var models = {
           writeLog(task, 'get')
 
           let tmpl = _.template(data)({
-            user: userInfo.email,
+            user: userInfo,
             projects: project,
             tasks: task,
             profession: profession
@@ -80,7 +80,7 @@ var models = {
           _.each( res, function(d) {
             if (i.type == d.type) {
                 // console.log(i.name);
-                  select+='<option value="'+i._id+'">'+i.name+'   ('+i.hours*profession[i.type].cost+')</option>'
+                  select+='<option value="'+d._id+'">'+d.name+'   ('+d.hours*profession[d.type].cost+')</option>'
             }
           });
           select+='</optgroup>'

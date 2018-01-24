@@ -24,5 +24,10 @@ var UsersSchema = new Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
 });
 module.exports = mongoose.model('Users', UsersSchema);

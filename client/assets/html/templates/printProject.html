@@ -6,6 +6,9 @@
 table,table * {
   border: 1px solid #000;
 }
+table {
+  width: 100%;
+}
 legend {
   padding: 0 4px;
   background: #fff;
@@ -69,11 +72,11 @@ button {
                 </tr>
               <% _.each( res.tasks, function(d) {%>
                 <%  if (i.type == d.type) {%>
-                  <% allCost += i.hours*profession[i.type].cost %>
+                  <% allCost += d.hours*profession[d.type].cost %>
                   <tr>
-                    <td><%= i.name %></td>
-                    <td><%= i.hours %></td>
-                    <td><%= i.hours*profession[i.type].cost %></td>
+                    <td><%= d.name %></td>
+                    <td><%= d.hours %></td>
+                    <td><%= d.hours*profession[d.type].cost %></td>
                   </tr>
                 <% }%>
               <% })}); %>

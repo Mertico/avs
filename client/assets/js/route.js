@@ -109,8 +109,7 @@ var route = {
     $.ajax({
       type: 'DELETE',
       dataType: 'json',
-      url: "/api/project/"+id,
-      data: dataForm
+      url: "/api/project/"+id
     }).done(function(res) {
       writeLog(res, 'put')
       if (res.errors) {
@@ -169,8 +168,7 @@ var route = {
     $.ajax({
       type: 'DELETE',
       dataType: 'json',
-      url: "/api/task/"+id,
-      data: dataForm
+      url: "/api/task/"+id
     }).done(function(res) {
       writeLog(res, 'put')
       if (res.errors) {
