@@ -1,7 +1,9 @@
 <div class="container home">
   <section id="content">
 
-    <span class="home_user"><span>Пользователь:</span><%-user.email%></span>
+    <span class="home_user"><span>Пользователь:</span><%-user.email%>
+    <button class="red" onclick="javascript:models.exit();" type="button">Выход</button>
+  </span>
     <h1>
       Проекты
       <button onclick="javascript:models.addProject();" type="button">Добавить проект</button>

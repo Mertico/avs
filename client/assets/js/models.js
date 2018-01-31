@@ -165,6 +165,16 @@ var models = {
       });
     });
   },
+  exit: () => {
+    $.ajax({
+      type: 'DELETE',
+      dataType: 'json',
+      url: "/api/auth"
+    }).done(function(res) {
+      location.reload(true);
+    });
+    // location.reload(true);
+  },
 
 }
 
